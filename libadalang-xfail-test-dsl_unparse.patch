@@ -1,0 +1,9 @@
+--- a/testsuite/tests/dsl_unparse/test.yaml
++++ b/testsuite/tests/dsl_unparse/test.yaml
+@@ -2,5 +2,5 @@
+ use_testsuite_python: true
+ timeout: 600
+ control:
+-- [SKIP, "restricted_env",
++- [XFAIL, "True",
+    "Assumes \"langkit\" checked out and built in the Libadalang repository"]
