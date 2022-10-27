@@ -7,7 +7,7 @@
 # Upstream source information.
 %global upstream_owner    AdaCore
 %global upstream_name     libadalang
-%global upstream_version  22.0.0
+%global upstream_version  23.0.0
 %global upstream_gittag   v%{upstream_version}
 
 Name:           libadalang
@@ -15,7 +15,7 @@ Version:        %{upstream_version}
 Release:        1%{?dist}
 Summary:        The Ada semantic analysis library
 
-License:        GPL-3.0-only WITH GCC-exception-3.1
+License:        Apache-2.0
 
 URL:            https://github.com/%{upstream_owner}/%{upstream_name}
 Source:         %{url}/archive/%{upstream_gittag}/%{upstream_name}-%{upstream_version}.tar.gz
@@ -214,10 +214,11 @@ exit 1
 ###########
 
 %files
-%license COPYING3 COPYING.RUNTIME
+%license LICENSE
 %doc README*
 %{_libdir}/%{name}.so.%{version}
 %{_bindir}/lal_parse
+%{_bindir}/lal_prep
 %{_bindir}/navigate
 %{_bindir}/nameres
 %{_bindir}/gnat_compare
@@ -240,5 +241,8 @@ exit 1
 ###############
 
 %changelog
+* Sun Oct 30 2022 Dennis van Raaij <dvraaij@fedoraproject.org> - 23.0.0-1
+- Updated to v23.0.0, using the archive available on GitHub.
+
 * Sun Sep 04 2022 Dennis van Raaij <dvraaij@fedoraproject.org> - 22.0.0-1
 - New package.
