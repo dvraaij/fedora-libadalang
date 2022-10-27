@@ -4,7 +4,7 @@
 # Upstream source information.
 %global upstream_owner    AdaCore
 %global upstream_name     libadalang
-%global upstream_version  22.0.0
+%global upstream_version  23.0.0
 %global upstream_gittag   v%{upstream_version}
 
 Name:           libadalang
@@ -12,7 +12,7 @@ Version:        %{upstream_version}
 Release:        1%{?dist}
 Summary:        The Ada semantic analysis library
 
-License:        GPL-3.0-only WITH GCC-exception-3.1
+License:        Apache-2.0
 
 URL:            https://github.com/%{upstream_owner}/%{upstream_name}
 Source:         %{url}/archive/%{upstream_gittag}/%{upstream_name}-%{upstream_version}.tar.gz
@@ -30,6 +30,11 @@ BuildRequires:  python3-funcy
 BuildRequires:  python3-mako
 BuildRequires:  python3-jsonschema
 BuildRequires:  python3-langkit
+
+# [Fedora-specific] Customize testing for Fedora.
+Patch:          %{name}-adapt-tests-for-fedora.patch
+# Python 3.12: Fix syntax warning on incorrect usage of the escape character.
+Patch:          %{name}-fix-incorrect-usage-of-escape-character.patch
 
 # Build only on architectures where GPRbuild is available.
 ExclusiveArch:  %{GPRbuild_arches}
@@ -184,12 +189,6 @@ abstract project Directories is
 end Directories;
 EOF
 
-# Disable test that cannot be run on Fedora.
-cat << EOF > testsuite/tests/dsl_unparse/test.yaml
-control:
-- [XFAIL, "True", "Assumes \"langkit\" checked out and built in the Libadalang repository"]
-EOF
-
 # Make the files installed in the buildroot and the override for directories.gpr
 # visible to the test runner.
 export PATH=%{buildroot}%{_bindir}:$PATH
@@ -199,12 +198,10 @@ export C_INCLUDE_PATH=%{buildroot}%{_includedir}:$C_INCLUDE_PATH
 export GPR_PROJECT_PATH=${PWD}/testsuite/multilib:%{buildroot}%{_GNAT_project_dir}:$GPR_PROJECT_PATH
 export PYTHONPATH=%{buildroot}%{python3_sitearch}:%{buildroot}%{python3_sitelib}:$PYTHONPATH
 
-# Run the tests, but skip those for the OCaml API as we don't include it fow now.
-%python3 ./manage.py test \
-         --with-python=%python3 \
+%python3 testsuite/testsuite.py \
          --show-error-output \
          --max-consecutive-failures=4 \
-         --disable-ocaml
+         --build-mode=prod
 
 %endif
 
@@ -214,10 +211,11 @@ export PYTHONPATH=%{buildroot}%{python3_sitearch}:%{buildroot}%{python3_sitelib}
 ###########
 
 %files
-%license COPYING3 COPYING.RUNTIME
+%license LICENSE
 %doc README*
 %{_libdir}/%{name}.so.%{version}
 %{_bindir}/lal_parse
+%{_bindir}/lal_prep
 %{_bindir}/navigate
 %{_bindir}/nameres
 %{_bindir}/gnat_compare
@@ -240,5 +238,8 @@ export PYTHONPATH=%{buildroot}%{python3_sitearch}:%{buildroot}%{python3_sitelib}
 ###############
 
 %changelog
+* Sun Oct 30 2022 Dennis van Raaij <dvraaij@fedoraproject.org> - 23.0.0-1
+- Updated to v23.0.0.
+
 * Sun Sep 04 2022 Dennis van Raaij <dvraaij@fedoraproject.org> - 22.0.0-1
 - New package.

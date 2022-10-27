@@ -1,0 +1,19 @@
+--- a/testsuite/python_support/inline_playground.py
++++ b/testsuite/python_support/inline_playground.py
+@@ -22,11 +22,11 @@
+ YELLOW = '\033[33m'
+ 
+ assign_expr_re = re.compile(
+-    "\s*"
+-    "(?P<identifier>[a-zA-Z_][a-zA-Z0-9_]*)"
+-    "\s*"
+-    "="
+-    "(?P<expr>.*)"
++    r"\s*"
++    r"(?P<identifier>[a-zA-Z_][a-zA-Z0-9_]*)"
++    r"\s*"
++    r"="
++    r"(?P<expr>.*)"
+ )
+ 
+ 
