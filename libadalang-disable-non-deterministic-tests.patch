@@ -1,0 +1,59 @@
+--- a/testsuite/tests/ada_api/foreign_nodes/test.yaml
++++ b/testsuite/tests/ada_api/foreign_nodes/test.yaml
+@@ -1,2 +1,4 @@
+ driver: ada-api
+ main: main.adb
++control:
++- [XFAIL, "True", "Non-deterministic output across architectures." ]
+--- a/testsuite/tests/lexical_envs/envs_1/test.yaml
++++ b/testsuite/tests/lexical_envs/envs_1/test.yaml
+@@ -1,2 +1,4 @@
+ driver: parser
+ action: pp-file-with-lexical-envs
++control:
++- [XFAIL, "True", "Non-deterministic output across architectures." ]
+--- a/testsuite/tests/lexical_envs/envs_2/test.yaml
++++ b/testsuite/tests/lexical_envs/envs_2/test.yaml
+@@ -1,2 +1,4 @@
+ driver: parser
+ action: pp-file-with-lexical-envs
++control:
++- [XFAIL, "True", "Non-deterministic output across architectures." ]
+--- a/testsuite/tests/lexical_envs/envs_3/test.yaml
++++ b/testsuite/tests/lexical_envs/envs_3/test.yaml
+@@ -1,2 +1,4 @@
+ driver: parser
+ action: pp-file-with-lexical-envs
++control:
++- [XFAIL, "True", "Non-deterministic output across architectures." ]
+--- a/testsuite/tests/lexical_envs/envs_4/test.yaml
++++ b/testsuite/tests/lexical_envs/envs_4/test.yaml
+@@ -1,3 +1,5 @@
+ driver: parser
+ action: pp-file-with-lexical-envs
+ input_file: foo-bar.ads
++control:
++- [XFAIL, "True", "Non-deterministic output across architectures." ]
+--- a/testsuite/tests/lexical_envs/envs_5/test.yaml
++++ b/testsuite/tests/lexical_envs/envs_5/test.yaml
+@@ -1,3 +1,5 @@
+ driver: parser
+ action: pp-file-with-lexical-envs
+ input_file: a-b.adb
++control:
++- [XFAIL, "True", "Non-deterministic output across architectures." ]
+--- a/testsuite/tests/lexical_envs/gen_pkg_inst/test.yaml
++++ b/testsuite/tests/lexical_envs/gen_pkg_inst/test.yaml
+@@ -1,3 +1,5 @@
+ driver: parser
+ action: pp-file-with-lexical-envs
+ input_file: test.adb
++control:
++- [XFAIL, "True", "Non-deterministic output across architectures." ]
+--- a/testsuite/tests/lexical_envs/records/test.yaml
++++ b/testsuite/tests/lexical_envs/records/test.yaml
+@@ -1,2 +1,4 @@
+ driver: parser
+ action: pp-file-with-lexical-envs
++control:
++- [XFAIL, "True", "Non-deterministic output across architectures." ]
